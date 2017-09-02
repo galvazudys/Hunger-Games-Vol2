@@ -15,7 +15,10 @@ class App extends Component {
             <div className="container">
                 <BrowserRouter>
                     <div>
-                        <Header />
+                        <Route
+                            path="*"
+                            render={props => <Header {...props} />}
+                        />
                         <Route exact path="/" component={Home} />
                         <Route
                             exact

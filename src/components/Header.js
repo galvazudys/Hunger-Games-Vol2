@@ -18,8 +18,12 @@ import { grey50, deepPurpleA100 } from 'material-ui/styles/colors';
 import { firebaseApp } from '../firebase';
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+    }
     signOut() {
         firebaseApp.auth().signOut();
+        this.props.history.push('/signin');
     }
 
     render() {
