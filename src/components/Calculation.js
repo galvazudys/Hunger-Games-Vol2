@@ -13,8 +13,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import _ from 'lodash';
 
 function SingleTableRow(food) {
+    console.log(food);
     return (
         <TableRow>
+            {food.children[0]}
             <TableRowColumn>{food.food.fields.item_name}</TableRowColumn>
             <TableRowColumn> {food.food.fields.nf_total_fat}</TableRowColumn>
             <TableRowColumn>{food.food.fields.nf_sugars}</TableRowColumn>
@@ -50,7 +52,7 @@ class Calculation extends Component {
                   return (
                       <SingleTableRow
                           adjustForCheckbox={true}
-                          key={food._id}
+                          key={food._id + Math.random()}
                           selected={this.isSelected(index)}
                           food={food}
                       />
