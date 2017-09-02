@@ -4,11 +4,13 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import { grey50, deepPurpleA100 } from 'material-ui/styles/colors';
 import { bindActionCreators } from 'redux';
-import { fetchFood } from '../actions/index';
+import { fetchFood, fetchToTabel } from '../actions/index';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { List, ListItem } from 'material-ui/List';
 import CircularProgress from 'material-ui/CircularProgress';
+
+import Calculation from './Calculation';
 
 class Calculator extends Component {
     constructor(props) {
@@ -31,8 +33,8 @@ class Calculator extends Component {
         this.setState({ term: '' });
     }
 
-    clickedItem(foodId) {
-        console.log(foodId);
+    clickedItem(foodItem) {
+        this.props.fetchToTabel(foodItem);
     }
 
     render() {
@@ -56,10 +58,7 @@ class Calculator extends Component {
                         foodItem.fields.brand_name +
                         ')'
                     }
-                    onClick={this.clickedItem.bind(this, [
-                        foodItem._id,
-                        foodItem.fields.nf_calories
-                    ])}
+                    onClick={this.clickedItem.bind(this, foodItem)}
                 />
             );
         });
@@ -71,6 +70,7 @@ class Calculator extends Component {
             <div>
                 <MuiThemeProvider>
                     <div>
+                        <Calculation />
                         <TextField
                             value={this.state.term}
                             onChange={this.onInputChange}
@@ -101,7 +101,7 @@ const mapStateToProps = ({ food }) => {
 };
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ fetchFood }, dispatch);
+    return bindActionCreators({ fetchFood, fetchToTabel }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calculator);

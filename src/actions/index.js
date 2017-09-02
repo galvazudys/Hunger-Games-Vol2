@@ -3,6 +3,7 @@ import { keys } from '../config/keys';
 
 export const FETCH_FOOD = 'FETCH_FOOD';
 export const SIGN_IN = 'SIGN_IN';
+export const FETCH_TO_TABLE = 'FETCH_TO_TABLE';
 
 export function fetchFood(foodName) {
     const requestData = axios({
@@ -19,4 +20,8 @@ export function fetchFood(foodName) {
 
 export function logUser(userId) {
     return { type: SIGN_IN, payload: userId };
+}
+
+export function fetchToTabel(foodItem) {
+    return { type: FETCH_TO_TABLE, payload: foodItem };
 }
