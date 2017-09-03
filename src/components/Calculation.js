@@ -4,30 +4,20 @@ import {
     TableBody,
     TableHeader,
     TableHeaderColumn,
-    TableRow,
-    TableRowColumn
+    TableRow
 } from 'material-ui/Table';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import SingleTableRow from './SingleTableRow';
 
 import _ from 'lodash';
 
-function SingleTableRow(food) {
-    console.log(food);
-    return (
-        <TableRow>
-            {food.children[0]}
-            <TableRowColumn>{food.food.fields.item_name}</TableRowColumn>
-            <TableRowColumn> {food.food.fields.nf_total_fat}</TableRowColumn>
-            <TableRowColumn>{food.food.fields.nf_sugars}</TableRowColumn>
-            <TableRowColumn>{food.food.fields.nf_protein}</TableRowColumn>
-            <TableRowColumn>
-                {food.food.fields.nf_serving_weight_grams}
-            </TableRowColumn>
-            <TableRowColumn>{food.food.fields.nf_calories}</TableRowColumn>
-        </TableRow>
-    );
-}
+// function SingleTableRow(food) {
+//     console.log(food);
+//     return (
+
+//     );
+// }
 
 class Calculation extends Component {
     state = {
@@ -35,7 +25,6 @@ class Calculation extends Component {
     };
 
     isSelected = index => {
-        console.log(index);
         return this.state.selected.indexOf(index) !== -1;
     };
 
@@ -48,13 +37,14 @@ class Calculation extends Component {
     render() {
         const cell = !_.isEmpty(this.props.tableFood)
             ? _.map(this.props.tableFood, (food, index) => {
-                  console.log(food);
+                  console.log(index);
                   return (
                       <SingleTableRow
                           adjustForCheckbox={true}
                           key={food._id + Math.random()}
                           selected={this.isSelected(index)}
                           food={food}
+                          onRowClick={this.handleRowSelection}
                       />
                   );
               })
