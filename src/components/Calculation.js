@@ -4,7 +4,8 @@ import {
     TableBody,
     TableHeader,
     TableHeaderColumn,
-    TableRow
+    TableRow,
+    TableFooter
 } from 'material-ui/Table';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -37,7 +38,6 @@ class Calculation extends Component {
     render() {
         const cell = !_.isEmpty(this.props.tableFood)
             ? _.map(this.props.tableFood, (food, index) => {
-                  console.log(index);
                   return (
                       <SingleTableRow
                           adjustForCheckbox={true}
@@ -59,14 +59,51 @@ class Calculation extends Component {
                     <TableHeader>
                         <TableRow>
                             <TableHeaderColumn>Product Name</TableHeaderColumn>
-                            <TableHeaderColumn>Fat</TableHeaderColumn>
-                            <TableHeaderColumn>Sugar</TableHeaderColumn>
+                            <TableHeaderColumn> Fat </TableHeaderColumn>
+                            <TableHeaderColumn> Sugar </TableHeaderColumn>
                             <TableHeaderColumn>protein</TableHeaderColumn>
                             <TableHeaderColumn>Weight(g)</TableHeaderColumn>
                             <TableHeaderColumn>Calories</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                    <TableBody stripedRows={true}>{cell}</TableBody>
+                    <TableBody stripedRows={true}> {cell} </TableBody>
+                    <TableFooter adjustForCheckbox={true}>
+                        <TableRow>
+                            <TableHeaderColumn>
+                                Total Nutritions
+                            </TableHeaderColumn>
+                            <TableHeaderColumn>
+                                {_.sumBy(
+                                    this.props.tableFood,
+                                    x => x.fields.nf_total_fat
+                                )}
+                            </TableHeaderColumn>
+                            <TableHeaderColumn>
+                                {_.sumBy(
+                                    this.props.tableFood,
+                                    x => x.fields.nf_sugars
+                                )}
+                            </TableHeaderColumn>
+                            <TableHeaderColumn>
+                                {_.sumBy(
+                                    this.props.tableFood,
+                                    x => x.fields.nf_protein
+                                )}
+                            </TableHeaderColumn>
+                            <TableHeaderColumn>
+                                {_.sumBy(
+                                    this.props.tableFood,
+                                    x => x.fields.nf_serving_weight_grams
+                                )}
+                            </TableHeaderColumn>
+                            <TableHeaderColumn>
+                                {_.sumBy(
+                                    this.props.tableFood,
+                                    x => x.fields.nf_calories
+                                )}
+                            </TableHeaderColumn>
+                        </TableRow>
+                    </TableFooter>
                 </Table>
             </MuiThemeProvider>
         );
