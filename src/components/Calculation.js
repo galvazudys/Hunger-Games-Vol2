@@ -5,17 +5,18 @@ import {
     TableHeader,
     TableHeaderColumn,
     TableRow,
-    TableFooter
+    TableFooter,
+    TableRowColumn
 } from 'material-ui/Table';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import SingleTableRow from './SingleTableRow';
 
 import _ from 'lodash';
 
 class Calculation extends Component {
     state = {
-        selected: [1]
+        selected: [1],
+        tableOfFood: this.props.tableFood ? this.props.tableFood : []
     };
 
     isSelected = index => {
@@ -23,25 +24,15 @@ class Calculation extends Component {
     };
 
     handleRowSelection = selectedRows => {
+        console.log(selectedRows, 'this IS PIRATE SELECTION');
         this.setState({
             selected: selectedRows
         });
+        console.log(this.state.selected);
     };
 
     render() {
-        const cell = !_.isEmpty(this.props.tableFood)
-            ? _.map(this.props.tableFood, (food, index) => {
-                  return (
-                      <SingleTableRow
-                          adjustForCheckbox={true}
-                          key={food._id + Math.random()}
-                          selected={this.isSelected(index)}
-                          food={food}
-                          onRowClick={this.handleRowSelection}
-                      />
-                  );
-              })
-            : null;
+        console.log(this.state.tableOfFood);
         return (
             <MuiThemeProvider>
                 <Table
@@ -59,7 +50,40 @@ class Calculation extends Component {
                             <TableHeaderColumn>Calories</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                    <TableBody stripedRows={true}> {cell} </TableBody>
+                    <TableBody stripedRows={true}>
+                        {!_.isEmpty(this.props.tableFood) ? (
+                            _.map(this.props.tableFood, (food, index) => {
+                                return (
+                                    <TableRow
+                                        selected={this.isSelected(index)}
+                                        key={food._id + Math.random() * 33}
+                                    >
+                                        <TableRowColumn>
+                                            {food.fields.item_name}
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            {food.fields.nf_total_fat}
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            {food.fields.nf_sugars}
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            {food.fields.nf_protein}
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            {
+                                                food.fields
+                                                    .nf_serving_weight_grams
+                                            }
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            {food.fields.nf_calories}
+                                        </TableRowColumn>
+                                    </TableRow>
+                                );
+                            })
+                        ) : null}
+                    </TableBody>
                     <TableFooter adjustForCheckbox={true}>
                         <TableRow>
                             <TableHeaderColumn>
