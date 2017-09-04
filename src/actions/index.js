@@ -4,6 +4,7 @@ import { keys } from '../config/keys';
 export const FETCH_FOOD = 'FETCH_FOOD';
 export const SIGN_IN = 'SIGN_IN';
 export const FETCH_TO_TABLE = 'FETCH_TO_TABLE';
+export const DELETE_FROM_TABLE = 'DELETE_FROM_TABLE';
 
 export function fetchFood(foodName) {
     const requestData = axios({
@@ -24,4 +25,8 @@ export function logUser(userId) {
 
 export function fetchToTabel(foodItem) {
     return { type: FETCH_TO_TABLE, payload: foodItem };
+}
+
+export function deleteFromTable(index) {
+    return { type: DELETE_FROM_TABLE, index };
 }

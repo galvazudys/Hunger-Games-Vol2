@@ -10,6 +10,8 @@ import {
 } from 'material-ui/Table';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { deleteFromTable } from '../actions/index';
+import { bindActionCreators } from 'redux';
 
 import _ from 'lodash';
 
@@ -24,11 +26,7 @@ class Calculation extends Component {
     };
 
     handleRowSelection = selectedRows => {
-        console.log(selectedRows, 'this IS PIRATE SELECTION');
-        this.setState({
-            selected: selectedRows
-        });
-        console.log(this.state.selected);
+        this.props.deleteFromTable(selectedRows);
     };
 
     render() {
@@ -55,7 +53,6 @@ class Calculation extends Component {
                             _.map(this.props.tableFood, (food, index) => {
                                 return (
                                     <TableRow
-                                        selected={this.isSelected(index)}
                                         key={food._id + Math.random() * 33}
                                     >
                                         <TableRowColumn>
@@ -132,4 +129,8 @@ const mapStateToProps = ({ tableFood }) => {
     };
 };
 
-export default connect(mapStateToProps, null)(Calculation);
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({ deleteFromTable }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calculation);
