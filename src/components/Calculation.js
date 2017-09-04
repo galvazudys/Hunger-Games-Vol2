@@ -13,13 +13,6 @@ import SingleTableRow from './SingleTableRow';
 
 import _ from 'lodash';
 
-// function SingleTableRow(food) {
-//     console.log(food);
-//     return (
-
-//     );
-// }
-
 class Calculation extends Component {
     state = {
         selected: [1]
