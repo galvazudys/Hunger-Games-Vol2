@@ -62,10 +62,7 @@ class Calculator extends Component {
                 />
             );
         });
-        const preloader = () => {
-            return <CircularProgress size={100} thickness={7} />;
-        };
-        const renderFoodOrPreloader = food ? newFood : preloader();
+
         return (
             <div>
                 <MuiThemeProvider>

@@ -30,7 +30,6 @@ class Calculation extends Component {
     };
 
     render() {
-        console.log(this.state.tableOfFood);
         return (
             <MuiThemeProvider>
                 <Table
