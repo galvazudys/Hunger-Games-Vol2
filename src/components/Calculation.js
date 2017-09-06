@@ -33,11 +33,16 @@ class Calculation extends Component {
         return (
             <MuiThemeProvider>
                 <Table
-                    multiSelectable={true}
+                    height={'300px'}
+                    fixedHeader={true}
+                    fixedFooter={true}
                     onRowSelection={this.handleRowSelection}
                     selectable={true}
                 >
-                    <TableHeader>
+                    <TableHeader
+                        displaySelectAll={false}
+                        adjustForCheckbox={false}
+                    >
                         <TableRow>
                             <TableHeaderColumn>Product Name</TableHeaderColumn>
                             <TableHeaderColumn> Fat </TableHeaderColumn>
@@ -47,7 +52,7 @@ class Calculation extends Component {
                             <TableHeaderColumn>Calories</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                    <TableBody stripedRows={true}>
+                    <TableBody displayRowCheckbox={false} stripedRows={true}>
                         {!_.isEmpty(this.props.tableFood) ? (
                             _.map(this.props.tableFood, (food, index) => {
                                 return (
@@ -55,7 +60,10 @@ class Calculation extends Component {
                                         key={food._id + Math.random() * 33}
                                     >
                                         <TableRowColumn>
-                                            {food.fields.item_name}
+                                            <span>{food.fields.item_name}</span>
+                                            <div style={{ color: '#BDBDBD' }}>
+                                                Click To Remove...
+                                            </div>
                                         </TableRowColumn>
                                         <TableRowColumn>
                                             {food.fields.nf_total_fat}
@@ -80,7 +88,7 @@ class Calculation extends Component {
                             })
                         ) : null}
                     </TableBody>
-                    <TableFooter adjustForCheckbox={true}>
+                    <TableFooter adjustForCheckbox={false}>
                         <TableRow>
                             <TableHeaderColumn>
                                 Total Nutritions

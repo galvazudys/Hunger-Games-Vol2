@@ -38,13 +38,15 @@ class Header extends Component {
                 <MuiThemeProvider>
                     <Toolbar>
                         <ToolbarGroup firstChild={true}>
-                            <FontIcon
-                                className="material-icons"
-                                color={deepPurpleA100}
-                            >
-                                restaurant_menu
-                            </FontIcon>
-                            <ToolbarTitle text="Hunger Games" />
+                            <Link to="/home" style={{ textDecoration: 'none' }}>
+                                <FontIcon
+                                    className="material-icons"
+                                    color={deepPurpleA100}
+                                >
+                                    restaurant_menu
+                                </FontIcon>
+                                <ToolbarTitle text="Hunger Games" />
+                            </Link>
                         </ToolbarGroup>
                         <ToolbarGroup lastChild={true}>
                             <ToolbarTitle text="Profile" />

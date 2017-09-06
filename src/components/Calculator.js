@@ -8,7 +8,6 @@ import { fetchFood, fetchToTabel } from '../actions/index';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { List, ListItem } from 'material-ui/List';
-import CircularProgress from 'material-ui/CircularProgress';
 
 import Calculation from './Calculation';
 
@@ -84,7 +83,7 @@ class Calculator extends Component {
                         </div>
 
                         <br />
-                        <List>{renderFoodOrPreloader}</List>
+                        <List>{newFood}</List>
                     </div>
                 </MuiThemeProvider>
             </div>
