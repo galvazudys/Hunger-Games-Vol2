@@ -38,7 +38,7 @@ class Header extends Component {
                 <MuiThemeProvider>
                     <Toolbar>
                         <ToolbarGroup firstChild={true}>
-                            <Link to="/home" style={{ textDecoration: 'none' }}>
+                            <Link to="/" style={{ textDecoration: 'none' }}>
                                 <FontIcon
                                     className="material-icons"
                                     color={deepPurpleA100}
