@@ -90,37 +90,52 @@ class Calculation extends Component {
                     </TableBody>
                     <TableFooter adjustForCheckbox={false}>
                         <TableRow>
-                            <TableHeaderColumn>
+                            <TableHeaderColumn style={{ color: '#1c0101' }}>
                                 Total Nutritions
                             </TableHeaderColumn>
                             <TableHeaderColumn>
-                                {_.sumBy(
-                                    this.props.tableFood,
-                                    x => x.fields.nf_total_fat
+                                {_.round(
+                                    _.sumBy(
+                                        this.props.tableFood,
+                                        x => x.fields.nf_total_fat
+                                    ),
+                                    2
                                 )}
                             </TableHeaderColumn>
                             <TableHeaderColumn>
-                                {_.sumBy(
-                                    this.props.tableFood,
-                                    x => x.fields.nf_sugars
+                                {_.round(
+                                    _.sumBy(
+                                        this.props.tableFood,
+                                        x => x.fields.nf_sugars
+                                    ),
+                                    2
                                 )}
                             </TableHeaderColumn>
                             <TableHeaderColumn>
-                                {_.sumBy(
-                                    this.props.tableFood,
-                                    x => x.fields.nf_protein
+                                {_.round(
+                                    _.sumBy(
+                                        this.props.tableFood,
+                                        x => x.fields.nf_protein
+                                    ),
+                                    2
                                 )}
                             </TableHeaderColumn>
                             <TableHeaderColumn>
-                                {_.sumBy(
-                                    this.props.tableFood,
-                                    x => x.fields.nf_serving_weight_grams
+                                {_.round(
+                                    _.sumBy(
+                                        this.props.tableFood,
+                                        x => x.fields.nf_serving_weight_grams,
+                                        2
+                                    )
                                 )}
                             </TableHeaderColumn>
                             <TableHeaderColumn>
-                                {_.sumBy(
-                                    this.props.tableFood,
-                                    x => x.fields.nf_calories
+                                {_.round(
+                                    _.sumBy(
+                                        this.props.tableFood,
+                                        x => x.fields.nf_calories
+                                    ),
+                                    2
                                 )}
                             </TableHeaderColumn>
                         </TableRow>
