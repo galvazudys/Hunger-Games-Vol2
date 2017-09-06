@@ -44,7 +44,7 @@ class Calculation extends Component {
                         adjustForCheckbox={false}
                     >
                         <TableRow>
-                            <TableHeaderColumn>Product Name</TableHeaderColumn>
+                            <TableHeaderColumn>Name</TableHeaderColumn>
                             <TableHeaderColumn> Fat </TableHeaderColumn>
                             <TableHeaderColumn> Sugar </TableHeaderColumn>
                             <TableHeaderColumn>protein</TableHeaderColumn>
@@ -91,7 +91,7 @@ class Calculation extends Component {
                     <TableFooter adjustForCheckbox={false}>
                         <TableRow>
                             <TableHeaderColumn style={{ color: '#1c0101' }}>
-                                Total Nutritions
+                                Total
                             </TableHeaderColumn>
                             <TableHeaderColumn>
                                 {_.round(

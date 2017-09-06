@@ -10,13 +10,15 @@ import _ from 'lodash';
 import { List, ListItem } from 'material-ui/List';
 
 import Calculation from './Calculation';
+import Loader from './Loader';
 
 class Calculator extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            term: ''
+            term: '',
+            openLoader: false
         };
 
         this.onInputChange = this.onInputChange.bind(this);
@@ -28,7 +30,10 @@ class Calculator extends Component {
     }
 
     onSubmit(e) {
-        this.props.fetchFood(this.state.term);
+        this.setState({ openLoader: true });
+        this.props.fetchFood(this.state.term).then(() => {
+            this.setState({ openLoader: false });
+        });
         this.setState({ term: '' });
     }
 
@@ -68,21 +73,26 @@ class Calculator extends Component {
                     <div>
                         <Calculation />
                         <TextField
+                            style={{ marginTop: '60px' }}
                             value={this.state.term}
                             onChange={this.onInputChange}
-                            hintText="Hint Text"
-                            floatingLabelText="Floating Label Text"
+                            hintText="Enter a Product"
+                            floatingLabelText="Product Name"
                         />
-                        <div>
-                            <RaisedButton
-                                label="Submit"
-                                labelColor={grey50}
-                                backgroundColor={deepPurpleA100}
-                                onClick={this.onSubmit}
-                            />
-                        </div>
+
+                        <RaisedButton
+                            label="Search"
+                            labelColor={grey50}
+                            backgroundColor={deepPurpleA100}
+                            onClick={this.onSubmit}
+                            style={{ marginLeft: '20px' }}
+                        />
 
                         <br />
+                        <span style={{ color: '#b991ff' }}>
+                            <h3>Click on list item to add...</h3>
+                        </span>
+                        <Loader openLoader={this.state.openLoader} />
                         <List>{newFood}</List>
                     </div>
                 </MuiThemeProvider>
