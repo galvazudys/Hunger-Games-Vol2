@@ -9,7 +9,7 @@ class Home extends Component {
                 <div>
                     <h1
                         style={{
-                            color: '#b991ff',
+                            color: '#8c64d6',
                             textAlign: 'center',
                             background:
                                 'linear-gradient(to bottom, rgba(240,249,255,1) 0%,rgba(203,235,255,1) 47%,rgba(161,219,255,1) 100%)',
@@ -26,7 +26,15 @@ class Home extends Component {
                                     textDecoration: 'underline'
                                 }}
                             >
-                                Is Your Dream be Fit?
+                                Is Your Dream
+                                <span
+                                    style={{
+                                        color: '#f27e26',
+                                        fontSize: '20px'
+                                    }}
+                                >
+                                    be Fit?
+                                </span>
                             </p>
                         </div>
                         Hunger Games
@@ -39,6 +47,7 @@ class Home extends Component {
                             <Link to="/register">
                                 <button
                                     style={{
+                                        marginTop: '80px',
                                         padding: '20px 60px',
                                         borderRadius: '10px',
                                         border: 'solid #b991ff 3px ',
