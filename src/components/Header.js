@@ -8,6 +8,8 @@ import FontIcon from 'material-ui/FontIcon';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import DropDownMenu from 'material-ui/DropDownMenu';
 import {
     Toolbar,
     ToolbarGroup,
@@ -16,6 +18,7 @@ import {
 } from 'material-ui/Toolbar';
 import { grey50, deepPurpleA100 } from 'material-ui/styles/colors';
 import { firebaseApp } from '../firebase';
+import _ from 'lodash';
 
 class Header extends Component {
     signOut() {
@@ -24,14 +27,13 @@ class Header extends Component {
     }
 
     render() {
-        const userExistToLogOut =
-            this.props.user !== null ? (
-                <MenuItem onClick={() => this.signOut()} primaryText="Logout" />
-            ) : (
-                <Link style={{ textDecoration: 'none' }} to="/signin">
-                    <MenuItem primaryText="SignIn" />
-                </Link>
-            );
+        const userExistToLogOut = !_.isEmpty(this.props.user) ? (
+            <MenuItem onClick={() => this.signOut()} primaryText="Logout" />
+        ) : (
+            <Link style={{ textDecoration: 'none' }} to="/signin">
+                <MenuItem primaryText="Sign In" />
+            </Link>
+        );
 
         return (
             <div>
@@ -41,37 +43,58 @@ class Header extends Component {
                             <Link to="/" style={{ textDecoration: 'none' }}>
                                 <FontIcon
                                     className="material-icons"
-                                    color={deepPurpleA100}
+                                    style={{ color: '#f27e26' }}
                                 >
-                                    restaurant_menu
+                                    whatshot
                                 </FontIcon>
-                                <ToolbarTitle text="Hunger Games" />
+                                <ToolbarTitle
+                                    style={{
+                                        fontFamily: "'Amatic SC', cursive"
+                                    }}
+                                    text="Hunger Games"
+                                />
                             </Link>
                         </ToolbarGroup>
                         <ToolbarGroup lastChild={true}>
-                            <ToolbarTitle text="Profile" />
+                            <FontIcon className="material-icons">
+                                person
+                            </FontIcon>
+                            <ToolbarTitle
+                                style={{ paddingRight: '0' }}
+                                text={
+                                    !_.isEmpty(this.props.user) ? (
+                                        this.props.user.email
+                                    ) : (
+                                        <span style={{ color: '#f27e26' }}>
+                                            Register
+                                        </span>
+                                    )
+                                }
+                            />
                             <IconMenu
                                 iconButtonElement={
-                                    <IconButton touch={true}>
-                                        <NavigationExpandMoreIcon />
+                                    <IconButton
+                                        style={{ padding: '0' }}
+                                        touch={true}
+                                    >
+                                        <MoreVertIcon />
                                     </IconButton>
                                 }
                             >
-                                <Link
-                                    style={{ textDecoration: 'none' }}
-                                    to="/register"
-                                >
-                                    <MenuItem primaryText="Register" />
-                                </Link>
+                                {_.isEmpty(this.props.user) ? (
+                                    <Link
+                                        style={{ textDecoration: 'none' }}
+                                        to="/register"
+                                    >
+                                        <MenuItem primaryText="Register" />
+                                    </Link>
+                                ) : null}
                                 {userExistToLogOut}
                             </IconMenu>
-
-                            <FontIcon className="muidocs-icon-custom-sort" />
-                            <ToolbarSeparator />
                             <Link to="/calculator">
                                 <RaisedButton
                                     backgroundColor={deepPurpleA100}
-                                    label="Calculator"
+                                    label="Counter"
                                     labelColor={grey50}
                                 />
                             </Link>

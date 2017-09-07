@@ -22,8 +22,7 @@ class Home extends Component {
                         <div>
                             <p
                                 style={{
-                                    fontSize: '10px',
-                                    textDecoration: 'underline'
+                                    fontSize: '10px'
                                 }}
                             >
                                 Is Your Dream
@@ -33,15 +32,23 @@ class Home extends Component {
                                         fontSize: '20px'
                                     }}
                                 >
-                                    be Fit?
+                                    having a Fit, healthy body ?
                                 </span>
                             </p>
                         </div>
                         Hunger Games
                         <div>
-                            <p style={{ fontSize: '20px' }}>
+                            <p style={{ color: '#23d160', fontSize: '20px' }}>
                                 Lets play a "GAME"
                             </p>
+                            <div
+                                style={{
+                                    color: '#f27e26',
+                                    fontSize: '20px'
+                                }}
+                            >
+                                To be just bit <em>Better</em> today
+                            </div>
                         </div>
                         <div>
                             <Link to="/register">

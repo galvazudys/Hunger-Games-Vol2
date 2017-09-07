@@ -13,7 +13,7 @@ import reducers from './reducers';
 
 firebaseApp.auth().onAuthStateChanged(user => {
     if (user) {
-        store.dispatch(logUser(user.uid));
+        store.dispatch(logUser({ userId: user.uid, email: user.email }));
     } else {
         console.log('Need to Be Log In.....');
     }
