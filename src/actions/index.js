@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { keys } from '../config/keys';
+import { database, firebaseApp } from '../firebase';
+import _ from 'lodash';
 
 export const FETCH_FOOD = 'FETCH_FOOD';
 export const SIGN_IN = 'SIGN_IN';
 export const FETCH_TO_TABLE = 'FETCH_TO_TABLE';
 export const DELETE_FROM_TABLE = 'DELETE_FROM_TABLE';
+export const FETCH_USERS_DATA = 'FETCH_USERS_DATA';
 
 export function fetchFood(foodName) {
     const requestData = axios({
@@ -29,4 +32,23 @@ export function fetchToTabel(foodItem) {
 
 export function deleteFromTable(index) {
     return { type: DELETE_FROM_TABLE, index };
+}
+
+export function fetchUsersData(date) {
+    const firebaseUser = firebaseApp.auth().currentUser;
+    return dispatch => {
+        database
+            .ref(`users/${firebaseUser.uid}/${date}`)
+            .once('value', snapshot => {
+                if (_.isNull(snapshot.val())) {
+                    console.log('is NUll validation');
+                    return;
+                }
+                return dispatch({
+                    type: FETCH_USERS_DATA,
+                    payload: snapshot.val().tableFood
+                });
+            });
+    };
+    // return { type: FETCH_USERS_DATA, payload:  };
 }
